@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import TextField from './TextField'
 import GoogleLoginButton from '../Buttons/GooleLoginButton'
 import LoginForm from './LoginForm'
+import UserPreferencesForm from './UserPreferncesForm'
 import StepButton from '../Buttons/StepButton'
-import {
-  requiredFieldsValid
-} from './form-utils'
+import { requiredFieldsValid } from './form-utils'
 
 import '../App.css'
 
@@ -79,22 +77,24 @@ const Login = ({ onSubmit }) => {
         <span>PromoNavigator Sign Up</span>
       </div>
       <div>
-      {
-          step === 1  ?
-    <div>
-    <div className="google-login">
-        <GoogleLoginButton />
-    </div>
-        <LoginForm onSubmit={handleSubmit} validationCallback={checkAfterValidation} validate={validate} />
-     </div>
-      :
-      <div>
-      Two
+        {step === 1 ? (
+          <div>
+            <div className="google-login">
+              <GoogleLoginButton />
+            </div>
+            <LoginForm
+              onSubmit={handleSubmit}
+              validationCallback={checkAfterValidation}
+              validate={validate}
+            />
+          </div>
+        ) : (
+          <div>
+            <UserPreferencesForm />
+          </div>
+        )}
       </div>
-      
-      }
-      </div>
-     </>
+    </>
   )
 }
 

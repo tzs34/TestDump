@@ -1,18 +1,18 @@
 :root {
-  --submit-button-background-color:#00B2EE;
+  --submit-button-background-color: #00b2ee;
   --input-normal-border-color: #888888;
-  --input-focus-border-color: #05EDFF;
-  --input-success-border-color: #00FF00;
+  --input-focus-border-color: #05edff;
+  --input-success-border-color: #00ff00;
   --input-warning-border-color: red;
   --login-background-color: #4caf50;
   --box-shadowColor: #888888;
-  --step-inactive-color: #EF6F00;
-  --step-active-color:#00B2EE;
+  --step-inactive-color: #ef6f00;
+  --step-active-color: #00b2ee;
   --step-separationMargin: 7em;
   --step-bubbleRadius: 1em;
   --step-lineWidth: 2em;
+  --fade-timeout: 400ms;
 }
-
 
 .App {
   text-align: center;
@@ -81,7 +81,6 @@
   align-items: center;
   background-color: white;
   margin: 20px 5px 20px 0px;
-  box-shadow: 5px 10px #888888;
 }
 
 .login-form {
@@ -93,14 +92,14 @@
 }
 
 .form-div {
-  font-size: 1.2em;
+  font-size: 1em;
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 5px;
 }
 
-.form-submit{
+.form-submit {
   font-size: 1em;
   display: flex;
   justify-content: center;
@@ -180,17 +179,16 @@ input[type='submit'] {
 
 .google-login {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   padding: 18px;
   width: 100%;
 }
 
 /* step button */
 
-
 .step-div {
   list-style-type: none;
-  color: #0086BF;
+  color: #0086bf;
   text-transform: none;
   font-size: 18px;
   width: 20%;
@@ -198,7 +196,7 @@ input[type='submit'] {
   position: relative;
 }
 
- .step-div:before {
+.step-div:before {
   text-align: center;
   content: counter(step);
   counter-increment: step;
@@ -221,7 +219,7 @@ input[type='submit'] {
   position: absolute;
   left: 100%;
   top: 22px;
-  z-index:-1;
+  z-index: -1;
   /*put it behind the numbers*/
 }
 
@@ -232,17 +230,65 @@ input[type='submit'] {
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 
- .step-active:before,
- .step-active:after {
+.step-active:before,
+.step-active:after {
   background: #0086bf;
   color: white;
 }
 
-.step-row{
+.step-row {
   display: flex;
   justify-content: space-evenly;
   width: 30%;
   margin-bottom: 30px;
   overflow: hidden;
   counter-reset: step;
+}
+
+/* multi autocomplete */
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.wrap-row {
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  @media (max-width: 480px) {
+    justify-content: center;
+  }
+}
+
+.renderer-box {
+  box-shadow: 1px 3px #d4d4d5;
+  padding: 0.5rem;
+  width: 130px;
+  margin: 1rem;
+}
+
+.renderer-label {
+  font-weight: bold;
+  margin: 1em;
+}
+
+/* fades using react-transition-group */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity var(--fade-timeout);
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity var(--fade-timeout);
 }
