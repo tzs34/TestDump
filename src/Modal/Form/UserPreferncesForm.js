@@ -9,7 +9,7 @@ import style from  '../styles.module.css'
 
 const UserPreferenceForm = ({ onSubmit, validate=false, validationCallback=()=>{}}) => (
   <form className={`${style.form} ${style.fadein}`} autoComplete="off" onSubmit={onSubmit}>
-    <div className={style.formdiv}>
+    <div className={`${style.formdiv} ${style.companyalignfix}`}>
       <TextField
         id="company"
         label="Company name ?"
@@ -27,7 +27,7 @@ const UserPreferenceForm = ({ onSubmit, validate=false, validationCallback=()=>{
         validationFunction={validateBrandSelection(validationCallback)}
        />
     </div>
-    <div className={style.formdiv}>
+    <div className={`${style.formdiv} ${style.categoryalignfix}`}>
       <AutoComplete 
         placeholder={'Choose category'} 
         name='category'

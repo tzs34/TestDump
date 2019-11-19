@@ -48,16 +48,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10px;
   }
   
   .formdiv {
     font-size: 1em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 5px;
     max-width: 400px;
+  }
+
+  .brandalignfix{
+    margin-left: -3px;
+  }
+
+  .categoryalignfix{
+    margin-left: 5px;
+  }
+  
+  .companyalignfix input{
+    margin-right: -5px;
   }
   
   .formcenter{
@@ -82,7 +94,8 @@
   }
   
   form {
-    padding: 50px;
+    padding: 40px;
+    margin-bottom: 10px;;
     background-color: var(--white-text-color);
   }
   
@@ -168,6 +181,7 @@
     width: 20%;
     float: left;
     position: relative;
+    padding: 0.1rem;
   }
   
   .stepdiv:before {
@@ -212,7 +226,7 @@
   .steprow {
     display: flex;
     justify-content: space-evenly;
-    width: 30%;
+    width: 40%;
     margin-bottom: 30px;
     overflow: hidden;
     counter-reset: step;
@@ -279,8 +293,7 @@
 
   /* fade in */
   .fadein {
-    margin-top: 25px;
-
+    
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 2s; /* Firefox < 16 */
         -ms-animation: fadein 2s; /* Internet Explorer */
