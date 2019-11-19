@@ -5,7 +5,7 @@ import { validateText, validateEmail, validatePassword } from './form-utils'
 import style from  '../styles.module.css'
 
 const LoginForm = ({ onSubmit, validationCallback, validate = false }) => (
-  <form className={`${style.loginform} ${style.fadein}`} autoComplete="off" onSubmit={onSubmit} >
+  <form className={`${style.form} ${style.fadein}`} autoComplete="off" onSubmit={onSubmit} >
     <div className={style.formdiv}>
       <TextField
         id="name"

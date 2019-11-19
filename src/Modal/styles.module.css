@@ -43,7 +43,7 @@
     margin: 20px 5px 20px 0px;
   }
   
-  .loginform {
+  .form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -224,7 +224,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 40px;
+    height: 30px;
   }
 
   .deletebtn{
@@ -250,7 +250,7 @@
   }
 
   .wraprowactive{
-    height:120px
+    margin-bottom: 1rem;
   }
 
   .wraprowinactive{

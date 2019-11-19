@@ -8,7 +8,7 @@ import {validateCategory, validateBrandSelection, validateText, BRAND_THRESHOLD 
 import style from  '../styles.module.css'
 
 const UserPreferenceForm = ({ onSubmit, validate=false, validationCallback=()=>{}}) => (
-  <form className={style.loginform} autoComplete="off" onSubmit={onSubmit}>
+  <form className={`${style.form} ${style.fadein}`} autoComplete="off" onSubmit={onSubmit}>
     <div className={style.formdiv}>
       <TextField
         id="company"
