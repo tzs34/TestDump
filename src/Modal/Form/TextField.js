@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import style from  '../styles.module.css'
+
 const TextField = ({
   label,
   id,
@@ -26,10 +28,11 @@ const TextField = ({
   function handleOnChange({ target: { value } }) {
     setValue(value)
   }
-  function handellValidation() {}
+
+  
 
   return (
-    <div className="form-div">
+    <div className={style.formdiv}>
       <div>
         <label htmlfor={`${id}-field`}>{label}</label>
       </div>
@@ -40,7 +43,7 @@ const TextField = ({
           type={type}
           value={value}
           onChange={handleOnChange}
-          className={error ? 'input-error' : ''}
+          className={String(error) === 'true' ? `${style.inputerror}` : ''}
         ></input>
       </div>
     </div>

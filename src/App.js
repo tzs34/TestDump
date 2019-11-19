@@ -1,13 +1,24 @@
 import React from 'react';
 import * as firebase from 'firebase';
-import logo from './logo.svg';
-import Portal from './Portal/overlayPortal'
-import Login from './Form/Login'
+import LandingPage from './LandingPage/landingPage';
+import Calendar from './Calendar/Calendar';
+import 'firebase/functions';
 import './App.css';
+import SignupPage from './Modal/SignupPage'
+import Signin from './Modal/Signin'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import {googleSignin} from './User/SignIn';
+import {getCurrentUser, addUserToDB} from './User/UserData';
 
 const config = {
   apiKey: "AIzaSyDvwXUFsuB4-lKOIVczlmv8ZuUxB6-1ZiE",
   authDomain: "efundamentals-dev01.firebaseapp.com",
+	region: "europe-west1",
   databaseURL: "https://efundamentals-dev01.firebaseio.com",
   projectId: "efundamentals-dev01",
   storageBucket: "efundamentals-dev01.appspot.com",
@@ -16,54 +27,48 @@ const config = {
   measurementId: "G-2RBTDFREKH"
 };
 
-firebase.initializeApp(config);
-
-const provider = new firebase.auth.GoogleAuthProvider();
+const fb = firebase.initializeApp(config);
+window.firebase = fb;
 
 const signIn = () => {
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    console.log(result);
-    
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    console.log(error);
-
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
+  googleSignin().then(uid => {
+    const formData = {
+      name: "Laurie McIver",
+      company: "EF",
+      categories: ["Pet"],
+      retailers: ["ASDA", "Morrisons", "Tesco"]
+    };
+    addUserToDB(uid, formData).then(resp => console.log(resp));
   });
 }
 
-
+const check = () => {
+  getCurrentUser().then(resp => console.log(resp));
+}
 
 function App() {
-
-  function onSubmitForm(e){
-    console.log(e)
-  }
-
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <h1>Promo Genie</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <button onClick={ () => signIn() }>Click to Sign In with Google</button>
-      </header> */}
-      <Portal>
-        <Login onSubmit={onSubmitForm} />
-      </Portal>
+      <Router>
+        <Switch>
+          <Route exact path="/signup">
+            <SignupPage />
+          </Route>
+          <Route exact path="/signin">
+            <Signin />
+          </Route>
+          <Route exact path="/signuptest">
+            <button onClick={ () => signIn() }>Click to Sign In with Google</button>
+            <button onClick={ () => check() }>Check User Signed In</button>
+          </Route>
+          <Route exact path="/demo">
+            <Calendar firebase={fb}/>
+          </Route>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

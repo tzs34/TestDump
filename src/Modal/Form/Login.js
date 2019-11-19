@@ -5,7 +5,7 @@ import UserPreferencesForm from './UserPreferncesForm'
 import StepButton from '../Buttons/StepButton'
 import { requiredFieldsValid } from './form-utils'
 
-import '../App.css'
+import style from  '../styles.module.css'
 
 const items = [
   { label: 'Beer' },
@@ -34,9 +34,10 @@ const defaultFormFields = {
   password: { value: null, required: true }
 }
 
-const Login = ({ onSubmit }) => {
+const Login = ({  submitUserDetails, submitUserPreferences, step}) => {
+  
   const [validate, setValidateStatus] = useState(false)
-  const [step, setStep] = useState(1)
+
   let fieldNumber = useRef(0)
   let validatedFields = useRef([])
 
@@ -61,25 +62,42 @@ const Login = ({ onSubmit }) => {
     if (currentValidatedFields.length === fieldNumber.current) {
       if (requiredFieldsValid(validatedFields.current)) {
         // submit you data
-        if (onSubmit && typeof onSubmit === 'function') {
-          onSubmit(currentValidatedFields)
+      
+        if (submitUserDetails && typeof submitUserDetails === 'function') {
+          submitUserDetails(currentValidatedFields)
+        
         }
-        validatedFields.current = []
-        setValidateStatus(false)
       }
+      validatedFields.current = []
+      setValidateStatus(false)
     }
   }
 
+  function onSubmitPeferences(e){
+    e.preventDefault()
+    setValidateStatus(true)
+
+    if (submitUserPreferences && typeof submitUserPreferences === 'function') {
+  
+ 
+    }
+  }
+
+  function checkPeferencesAfterValidation({id, value, valid}){
+    console.log(id, value, valid)
+  }
   return (
-    <>
-      <StepButton step={step} />
-      <div className="title">
+    <div>
+      <div className={style.formcenter}>
+        <StepButton step={step} stepNumber={2}/>
+      </div>
+      <div className={style.title}>
         <span>PromoNavigator Sign Up</span>
       </div>
       <div>
         {step === 1 ? (
           <div>
-            <div className="google-login">
+            <div className={style.googlelogin}>
               <GoogleLoginButton />
             </div>
             <LoginForm
@@ -90,11 +108,15 @@ const Login = ({ onSubmit }) => {
           </div>
         ) : (
           <div>
-            <UserPreferencesForm />
+            <UserPreferencesForm 
+              onSubmit={onSubmitPeferences} 
+              validationCallback={checkPeferencesAfterValidation} 
+              validate={validate}/>
           </div>
         )}
       </div>
-    </>
+      </div>
+  
   )
 }
 

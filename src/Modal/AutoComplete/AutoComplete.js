@@ -1,25 +1,6 @@
 import React from 'react'
 import Autosuggest from 'react-autosuggest'
-
-// Imagine you have a list of languages that you'd like to autosuggest.
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-  {
-    name: 'C++',
-    year: 1972
-  },
-  {
-    name: 'Java',
-    year: 2012
-  }
-]
+import {categories} from '../Form/form-utils'
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
@@ -28,18 +9,18 @@ const getSuggestions = value => {
 
   return inputLength === 0
     ? []
-    : languages.filter(
-        lang => lang.name.toLowerCase().slice(0, inputLength) === inputValue
+    : categories.filter(
+        lang => lang.toLowerCase().slice(0, inputLength) === inputValue
       )
 }
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name
+const getSuggestionValue = suggestion => suggestion
 
 // Use your imagination to render suggestions.
-const renderSuggestion = suggestion => <div>{suggestion.name}</div>
+const renderSuggestion = suggestion => <div>{suggestion}</div>
 
 class AutoComplete extends React.Component {
   constructor() {
@@ -55,7 +36,26 @@ class AutoComplete extends React.Component {
       suggestions: []
     }
   }
+  componentWillReceiveProps (nextProps){
 
+    const {validate} = nextProps
+    const{validationFunction, name} = this.props
+    const {value} = this.state
+
+    console.log(validationFunction)
+    console.log(typeof validationFunction === 'function')
+    console.log('####################')
+    if (
+      validate &&
+      validationFunction &&
+      typeof validationFunction === 'function'
+    ) {
+      let isValid = validationFunction(value, name )
+      if (!isValid) {
+        //setError(true)
+      }
+    }
+  }
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue
@@ -82,7 +82,7 @@ class AutoComplete extends React.Component {
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: this.props.placeholder,
       value,
       onChange: this.onChange
     }

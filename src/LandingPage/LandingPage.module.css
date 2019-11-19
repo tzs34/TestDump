@@ -1,0 +1,59 @@
+@import url("https://use.typekit.net/bzv3twq.css");
+
+.contentContainer {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+ .background { 
+    background: url(images/landingPage.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  }
+
+.links {
+    position: absolute;
+    justify-content: center;
+    margin-top: 60px;
+    left: 8%;
+}
+
+.links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.text {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    font-family: proxima-nova, sans-serif;
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0em;
+    line-height: 1.2em;
+    margin-left: 8%;
+    text-shadow: #140c66 0px 0px 12px;
+}
+
+.list{
+    line-height: 2.5em;
+}
+
+.title {
+    font-size: 62px;
+    font-weight: 700;
+}

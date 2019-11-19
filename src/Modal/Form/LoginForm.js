@@ -2,9 +2,11 @@ import React from 'react'
 import TextField from './TextField'
 import { validateText, validateEmail, validatePassword } from './form-utils'
 
+import style from  '../styles.module.css'
+
 const LoginForm = ({ onSubmit, validationCallback, validate = false }) => (
-  <form className="login-form" autoComplete="off" onSubmit={onSubmit}>
-    <div className="form-div">
+  <form className={`${style.loginform} ${style.fadein}`} autoComplete="off" onSubmit={onSubmit} >
+    <div className={style.formdiv}>
       <TextField
         id="name"
         label="What is your name ?"
@@ -12,7 +14,7 @@ const LoginForm = ({ onSubmit, validationCallback, validate = false }) => (
         validationFunction={validateText(validationCallback)}
       />
     </div>
-    <div className="form-div">
+    <div className={style.formdiv}>
       <TextField
         id="email"
         label="What is your email ?"
@@ -21,7 +23,7 @@ const LoginForm = ({ onSubmit, validationCallback, validate = false }) => (
         validationFunction={validateEmail(validationCallback)}
       />
     </div>
-    <div className="form-div">
+    <div className={style.formdiv}>
       <TextField
         id="password"
         label="What is your password ?"
@@ -31,8 +33,8 @@ const LoginForm = ({ onSubmit, validationCallback, validate = false }) => (
       />
     </div>
 
-    <div className="form-submit">
-      <input type="submit" value="Submit" />
+    <div className={style.formsubmit}>
+      <input type="submit" value="Next" />
     </div>
   </form>
 )
